@@ -267,12 +267,28 @@ public class Game {
 		choice4.setText("");
 	}
 	
-	public void playerAttack(){
-		position = "playerAttack";
+	public void mainOfficeDrink(){
+		position = "mainOfficeDrink";
+		mainTextArea.setText("You have drank from the water fountain. \n\nYou have regained 75 HP.");
+		playerHP = playerHP + 75;
+		hpLabelNumber.setText("" + playerHP);
+		
+		choice1.setText(">");
+		choice2.setText("");
+		choice3.setText("");
+		choice4.setText("");
+	}
+	
+	public void cristopherplayerAttack(){
+		position = "cristopherplayerAttack";
 		
 		int playerDamage = 0;
 		
-		playerDamage = new java.util.Random().nextInt(25);
+		if(weapon.equals("Wand")){
+			playerDamage = new java.util.Random().nextInt(15);
+		}
+		else if(weapon.equals("Iron Sword"));
+			playerDamage = new java.util.Random().nextInt(20);
 		
 		mainTextArea.setText("You attacked Cristopher and dealt " + playerDamage + " damage!");
 		
@@ -305,7 +321,10 @@ public class Game {
 	public void CristopherWin(){
 		position = "cristopherWin";
 		
-		mainTextArea.setText("'Congratulations. You won.' \n\nCristopher dissolved into nothingness.");
+		mainTextArea.setText("'Congratulations. You won.' \n\nCristopher dissolved into nothingness.\n\nMeanwhile, you claimed the Iron Sword!");
+		
+		weapon = "Iron Sword";
+		weaponLabelName.setText(weapon);
 		
 		choice1.setText(">");
 		choice2.setText("");
@@ -317,6 +336,9 @@ public class Game {
 		position = "cristopherlose";
 		
 		mainTextArea.setText("You are overexhausted.\n\n<GAME OVER>");
+		
+		playerHP = 100;
+		hpLabelNumber.setText("" + playerHP);
 		
 		choice1.setText(">");
 		choice2.setText("");
@@ -391,7 +413,7 @@ public class Game {
 				switch(yourChoice){
 				case "c1": break; //(Read Documents)
 				case "c2": break; //(Enter the classroom hallways)
-				case "c3": break; //(Drink (Full HP))
+				case "c3": mainOfficeDrink(); //(Drink (Full HP))
 				case "c4": break; 
 				}
 				break;
@@ -405,10 +427,10 @@ public class Game {
 				break;
 			case "cristopherFight":
 				switch(yourChoice){
-				case "c1": playerAttack(); break;
+				case "c1": cristopherplayerAttack(); break;
 				}
 				break;
-			case "playerAttack":
+			case "cristopherplayerAttack":
 				switch(yourChoice){
 				case "c1": 
 					if(CristopherHP < 1){
@@ -438,6 +460,11 @@ public class Game {
 				}
 				break;
 			case "cristopherWin":
+				switch(yourChoice){
+				case "c1": mainOffice(); break;
+				}
+				break;
+			case "mainOfficeDrink":
 				switch(yourChoice){
 				case "c1": mainOffice(); break;
 				}
