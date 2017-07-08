@@ -20,8 +20,8 @@ public class Game {
 	JPanel titleNamePanel, startButtonPanel, authorNamePanel, mainTextPanel, choiceButtonPanel, playerPanel;
 	JLabel titleNameLabel, authorNameLabel, hpLabel, hpLabelNumber, weaponLabel, weaponLabelName;
 	Font titleFont = new Font("Times New Roman", Font.PLAIN, 75);
-	Font normalFont = new Font ("Times New Roman", Font.PLAIN, 28);
-	Font authorFont = new Font ("Times New Roman", Font.PLAIN, 55);
+	Font normalFont = new Font("Times New Roman", Font.PLAIN, 28);
+	Font authorFont = new Font("Times New Roman", Font.PLAIN, 55);
 	JButton startButton, choice1, choice2, choice3, choice4;
 	JTextArea mainTextArea;
 	int playerHP, CristopherHP;
@@ -140,7 +140,7 @@ public class Game {
 		choice4.setFont(normalFont);
 		choice4.setFocusPainted(false);
 		choice4.addActionListener(choiceHandler);
-		choice3.setActionCommand("c4");
+		choice4.setActionCommand("c4");
 		choiceButtonPanel.add(choice4);
 		
 		playerPanel = new JPanel();
@@ -240,7 +240,15 @@ public class Game {
 	
 	public void nurseOffice(){
 		position = "nurseOffice";
+
+	}
+	
+	public void cristopherPreFight(){
+		position = "cristopherPreFight";
 		mainTextArea.setText("'Suprised to meet you here. I am Cristopher, one of the Four Traitors. Let us fight.' His weapon is a bow and arrow.'");
+		
+		playerHP = 100;
+		hpLabelNumber.setText("" + playerHP);
 		
 		choice1.setText("Fight.");
 		choice2.setText("");
@@ -261,9 +269,9 @@ public class Game {
 		position = "mainOffice";
 		mainTextArea.setText("You see piles of documents on a desk. There is a door that leads to the classroom hallways. There is a water fountain.");
 		
-		choice1.setText("Read the documents.");
+		choice1.setText("Drink.");
 		choice2.setText("Enter the Hallways.");
-		choice3.setText("Drink.");
+		choice3.setText("");
 		choice4.setText("");
 	}
 	
@@ -337,7 +345,7 @@ public class Game {
 		
 		mainTextArea.setText("You are overexhausted.\n\n<GAME OVER>");
 		
-		playerHP = 100;
+		playerHP = 0;
 		hpLabelNumber.setText("" + playerHP);
 		
 		choice1.setText(">");
@@ -411,10 +419,10 @@ public class Game {
 				break;
 			case "mainOffice":
 				switch(yourChoice){
-				case "c1": break; //(Read Documents)
-				case "c2": break; //(Enter the classroom hallways)
-				case "c3": mainOfficeDrink(); //(Drink (Full HP))
-				case "c4": break; 
+				case "c1": mainOfficeDrink(); break;
+				case "c2": cristopherFight(); break;
+				case "c3": break;
+				case "c4": break;
 				}
 				break;
 			case "nurseOffice":
@@ -466,10 +474,17 @@ public class Game {
 				break;
 			case "mainOfficeDrink":
 				switch(yourChoice){
-				case "c1": mainOffice(); break;
+				case "c1": cristopherPreFight(); break;
+				}
+				break;
+			case "cristopherPreFight":
+				switch(yourChoice){
+				case "c1": 
+				
 				}
 			}
 		}
 	}
 	
 }
+
